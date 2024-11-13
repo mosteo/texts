@@ -1,5 +1,5 @@
 name = "texts"
-description = "A no-frills library to deal with Unicode texts"
+description = "A no-frills library to deal with Unicode texts in Ada 2012"
 version = "0.1.0-dev"
 
 authors = ["Alejandro R. Mosteo"]
