@@ -1,0 +1,24 @@
+name = "demo"
+description = "A few examples using Texts"
+version = "0.1.0-dev"
+
+authors = ["Alejandro R. Mosteo"]
+maintainers = ["Alejandro R. Mosteo <amosteo@unizar.es>"]
+maintainers-logins = ["mosteo"]
+licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
+website = ""
+tags = []
+
+executables = ["demo"]
+
+[build-profiles]
+"*" = "validation"
+
+[build-switches]
+"*".ada_version = "ada12"
+
+[[depends-on]]
+texts = "*"
+
+[[pins]]
+texts = { path='..' }
