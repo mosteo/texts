@@ -8,3 +8,9 @@ maintainers-logins = ["mosteo"]
 licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
 website = ""
 tags = ["text", "unicode", "utf", "encoding"]
+
+[build-switches]
+"*".Ada_Version = "Ada12"
+
+[[depends-on]]
+umwi = "~0.1.0"

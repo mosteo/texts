@@ -1,14 +1,14 @@
-with "config/demo_config.gpr";
-project Demo is
+with "config/test_config.gpr";
+project Test is
 
    for Source_Dirs use ("src/", "config/");
-   for Object_Dir use "obj/" & Demo_Config.Build_Profile;
+   for Object_Dir use "obj/" & Test_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Exec_Dir use "bin";
-   for Main use ("demo.adb");
+   for Main use ("test.adb");
 
    package Compiler is
-      for Default_Switches ("Ada") use Demo_Config.Ada_Compiler_Switches;
+      for Default_Switches ("Ada") use Test_Config.Ada_Compiler_Switches;
    end Compiler;
 
    package Binder is
@@ -19,4 +19,4 @@ project Demo is
       for Artifacts (".") use ("share");
    end Install;
 
-end Demo;
+end Test;
