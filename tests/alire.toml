@@ -1,0 +1,12 @@
+name = 'texts_tests'
+description = ''
+version = '0.0.0-test'
+
+[[depends-on]]
+texts = '*'
+
+[[pins]]
+texts = { path = '..' }
+
+[build-profiles]
+texts = 'validation'

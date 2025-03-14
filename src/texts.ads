@@ -32,6 +32,10 @@ package Texts with Preelaborate is
    type Text is tagged private;
    --  A Unicode text. Internal representation is deliberately private.
 
+   --  Subtypes for documentation; they do not imply any actual checks
+   subtype Latin_1_String is String;
+   subtype UTF_8_String is String;
+
    -----------------------
    --  Boxing/Unboxing  --
    -----------------------
@@ -39,8 +43,8 @@ package Texts with Preelaborate is
    function Encode (This : Wide_Wide_String) return Text;
    function Encode (This : String; Encoding : Encodings) return Text;
 
-   function From_Latin_1 (This : String) return Text;
-   function From_UTF_8 (This : String) return Text;
+   function From_Latin_1 (This : Latin_1_String) return Text;
+   function From_UTF_8 (This : UTF_8_String) return Text;
 
    function Decode (This : Text) return Wide_Wide_String;
    --  Unwrap to a plain Ada string
@@ -50,7 +54,8 @@ package Texts with Preelaborate is
    ------------------------
 
    function Length (This : Text) return Natural;
-   --  The length in humanly-recognizable glyphs (unicode grapheme clusters)
+   --  The length in humanly-recognizable glyphs (unicode grapheme clusters).
+   --  NOTE that this is not the equivalent to 'Length.
 
    function Points (This : Text) return Natural;
    --  Equivalent to 'Length, so not necessarily humanly-meaningful. The
@@ -59,8 +64,8 @@ package Texts with Preelaborate is
    function Width (This : Text) return Natural;
    --  Width in cells of a fixed-width font. That is, how many columns in a
    --  terminal this text should take (in a Unicode-honoring terminal). Given
-   --  that emoji combos support is haphazard, there's not many guarantees
-   --  here...
+   --  that emoji combos support is haphazard, there are not many guarantees
+   --  here... Use UMWI crate for finer control.
 
    --------------------------
    --  Basic manipulation  --
