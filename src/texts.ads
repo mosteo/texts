@@ -81,13 +81,15 @@ package Texts with Preelaborate is
 
    subtype Code_Point is Wide_Wide_Character;
 
-   function Split (This : Text) return Containers.Vector;
-   --  TODO: this is just a test that we can depend on a limited-width child.
-   --  Use proper profile for customizable splits.
+   function Split (This      : Text;
+                   Separator : Code_Point)
+                   return Containers.Vector;
 
 private
 
    Unimplemented : exception;
+
+   subtype WWString is Wide_Wide_String;
 
    type Text is tagged record
       Str : Ada.Strings.Wide_Wide_Unbounded.Unbounded_Wide_Wide_String;

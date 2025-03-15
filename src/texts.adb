@@ -107,7 +107,26 @@ package body Texts is
    -- Split --
    -----------
 
-   function Split (This : Text) return Containers.Vector
-   is (raise Unimplemented);
+   function Split (This      : Text;
+                   Separator : Code_Point)
+                   return Containers.Vector
+   is
+      S : constant WWString := This.Decode;
+      Prev : Integer := S'First - 1;
+   begin
+      if This.Str = "" then
+         return (Containers.Suite.Vecs.Empty_Vector with null record);
+      end if;
+
+      return V : Containers.Vector do
+         for I in S'Range loop
+            if S (I) = Separator then
+               V.Append (To_Text (S (Prev + 1 .. I - 1)));
+               Prev := I;
+            end if;
+         end loop;
+         V.Append (To_Text (S (Prev + 1 .. S'Last)));
+      end return;
+   end Split;
 
 end Texts;

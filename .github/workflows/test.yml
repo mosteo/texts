@@ -20,8 +20,9 @@ jobs:
               gnat: 10
             - os: ubuntu-latest
               gnat: 12
-            - os: ubuntu-24.04-arm
-              gnat: 14
+            # Waiting for indexed compiler
+            # - os: ubuntu-24.04-arm
+            #   gnat: 14
             - os: windows-latest
               gnat: 11
 
