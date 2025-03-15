@@ -35,6 +35,9 @@ package Texts with Preelaborate is
    function "<" (L, R : Text) return Boolean;
    --  Based on code points, subject to change
 
+   function "=" (L : Text; R : Wide_Wide_String) return Boolean;
+   function "=" (L : Wide_Wide_String; R : Text) return Boolean;
+
    --  Subtypes for documentation; they do not imply any actual checks
    subtype Latin_1_String is String;
    subtype UTF_8_String is String;
@@ -82,6 +85,12 @@ package Texts with Preelaborate is
    subtype Code_Point is Wide_Wide_Character;
 
    function Split (This      : Text;
+                   Separator : Code_Point)
+                   return Containers.Vector;
+   --  For "", the result is a vector with a single element which is "".
+   --  For Split (" ", ' '), the result is two elements which are both "".
+
+   function Split (This      : Wide_Wide_String;
                    Separator : Code_Point)
                    return Containers.Vector;
 

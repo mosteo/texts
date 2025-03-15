@@ -18,6 +18,16 @@ package body Texts is
       return L.Str < R. Str;
    end "<";
 
+   ---------
+   -- "=" --
+   ---------
+
+   function "=" (L : Text; R : Wide_Wide_String) return Boolean
+   is (L.Str = R);
+
+   function "=" (L : Wide_Wide_String; R : Text) return Boolean
+   is (L = R.Str);
+
    -------------
    -- To_Text --
    -------------
@@ -114,10 +124,6 @@ package body Texts is
       S : constant WWString := This.Decode;
       Prev : Integer := S'First - 1;
    begin
-      if This.Str = "" then
-         return (Containers.Suite.Vecs.Empty_Vector with null record);
-      end if;
-
       return V : Containers.Vector do
          for I in S'Range loop
             if S (I) = Separator then
@@ -128,5 +134,14 @@ package body Texts is
          V.Append (To_Text (S (Prev + 1 .. S'Last)));
       end return;
    end Split;
+
+   -----------
+   -- Split --
+   -----------
+
+   function Split (This      : Wide_Wide_String;
+                   Separator : Code_Point)
+                   return Containers.Vector
+   is (To_Text (This).Split (Separator));
 
 end Texts;

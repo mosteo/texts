@@ -11,3 +11,4 @@ texts = { path = '..' }
 
 [build-profiles]
 texts = 'validation'
+texts_tests = 'validation'
