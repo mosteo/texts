@@ -1,0 +1,38 @@
+# Build the crate in a lot of compiler configurations
+
+name: Test
+on:
+    pull_request:
+    workflow_dispatch:
+jobs:
+  build:
+    runs-on: ${{ matrix.combo.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        combo:
+            - os: macos-13
+              gnat: 13
+            - os: macos-latest
+              gnat: 14
+            - os: ubuntu-20.04
+              gnat: 10
+            - os: ubuntu-latest
+              gnat: 12
+            - os: ubuntu-24.04-arm
+              gnat: 14
+            - os: windows-latest
+              gnat: 11
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: alire-project/setup-alire@v4
+        with:
+          version: 2.1.0
+          toolchain: gnat_native^${{ matrix.combo.gnat }} gprbuild
+
+      - name: Prepare pins
+        run: git clone https://github.com/mosteo/aaa ../aaa --branch=feat/monorepo
+
+      - run: alr test

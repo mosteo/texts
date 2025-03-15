@@ -32,6 +32,9 @@ package Texts with Preelaborate is
    type Text is tagged private;
    --  A Unicode text. Internal representation is deliberately private.
 
+   function "<" (L, R : Text) return Boolean;
+   --  Based on code points, subject to change
+
    --  Subtypes for documentation; they do not imply any actual checks
    subtype Latin_1_String is String;
    subtype UTF_8_String is String;
@@ -40,14 +43,19 @@ package Texts with Preelaborate is
    --  Boxing/Unboxing  --
    -----------------------
 
-   function Encode (This : Wide_Wide_String) return Text;
-   function Encode (This : String; Encoding : Encodings) return Text;
+   function To_Text (This : Wide_Wide_String) return Text;
 
    function From_Latin_1 (This : Latin_1_String) return Text;
    function From_UTF_8 (This : UTF_8_String) return Text;
 
+   function Decode (This : String; Encoding : Encodings) return Text;
    function Decode (This : Text) return Wide_Wide_String;
    --  Unwrap to a plain Ada string
+
+   function Encode (This : Text; Encoding : Encodings := UTF_8) return String;
+
+   function To_Latin_1 (This : Text) return Latin_1_String;
+   function To_UTF_8 (This : Text) return UTF_8_String;
 
    ------------------------
    --  Basic properties  --
@@ -70,6 +78,8 @@ package Texts with Preelaborate is
    --------------------------
    --  Basic manipulation  --
    --------------------------
+
+   subtype Code_Point is Wide_Wide_Character;
 
    function Split (This : Text) return Containers.Vector;
    --  TODO: this is just a test that we can depend on a limited-width child.
