@@ -5,7 +5,8 @@ on:
     pull_request:
     workflow_dispatch:
 jobs:
-  build:
+  test:
+    name: Test (gnat ${{ matrix.combo.gnat }}, ${{ matrix.combo.os }})
     runs-on: ${{ matrix.combo.os }}
     strategy:
       fail-fast: false
@@ -15,7 +16,7 @@ jobs:
               gnat: 13
             - os: macos-latest
               gnat: 14
-            - os: ubuntu-20.04
+            - os: ubuntu-22.04
               gnat: 10
             - os: ubuntu-latest
               gnat: 12
@@ -29,7 +30,7 @@ jobs:
 
       - uses: alire-project/setup-alire@v4
         with:
-          version: 2.1.0
+          version: nightly
           toolchain: gnat_native^${{ matrix.combo.gnat }} gprbuild
 
       - name: Prepare pins
