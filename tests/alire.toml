@@ -6,7 +6,9 @@ version = '0.0.0-test'
 texts = '*'
 
 [[pins]]
+aaa = { path = '../../aaa/aaa_base' }
 texts = { path = '..' }
 
 [build-profiles]
 texts = 'validation'
+texts_tests = 'validation'

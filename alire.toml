@@ -13,7 +13,8 @@ tags = ["text", "unicode", "utf", "encoding"]
 "*".Ada_Version = "Ada12"
 
 [[depends-on]]
-umwi = "~0.1.0"
+aaa = "~0.3"
+umwi = "~0.1"
 
 [test]
 runner = "alire"
