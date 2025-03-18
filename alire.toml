@@ -1,6 +1,6 @@
 name = "texts"
 description = "A no-frills library to deal with Unicode texts in Ada 2012"
-version = "0.1.0-dev"
+version = "0.1.0"
 
 authors = ["Alejandro R. Mosteo"]
 maintainers = ["Alejandro R. Mosteo <amosteo@unizar.es>"]
@@ -16,5 +16,5 @@ tags = ["text", "unicode", "utf", "encoding"]
 aaa = "~0.3"
 umwi = "~0.1"
 
-[test]
-runner = "alire"
+# [test]
+# runner = "alire"
